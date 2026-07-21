@@ -2,7 +2,7 @@ import { Clapperboard, Search, Moon } from "lucide-react";
 
 function Navbar() {
   return (
-    <nav className="border-b border-zinc-800 bg-zinc-950">
+    <nav className="border-b border-zinc-800 bg-zinc-950" aria-label="Main navigation">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         {/* Logo */}
         <div className="flex items-center gap-2">
@@ -16,14 +16,14 @@ function Navbar() {
         {/* Navigation */}
         <div className="flex items-center gap-8 text-sm font-medium">
           <a
-            href="#"
+            href="#home"
             className="transition duration-200 hover:text-red-500"
           >
             Home
           </a>
 
           <a
-            href="#"
+            href="#movies"
             className="transition duration-200 hover:text-red-500"
           >
             Movies

@@ -8,11 +8,11 @@ function Home() {
     <main className="min-h-screen bg-zinc-950 text-white">
       <Navbar />
 
-      <section className="mx-auto max-w-7xl px-6 py-20">      
+      <section id="home" className="mx-auto max-w-7xl px-6 py-20">      
         <HeroBanner />
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-16 space-y-16">
+      <section id="movies" className="mx-auto max-w-7xl px-6 py-16 space-y-16">
         <MovieSection title="Trending Movies" />
         <MovieSection title="Popular Movies"/>
         <MovieSection title="Top Rated Movies"/>
