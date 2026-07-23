@@ -1,5 +1,5 @@
 import MovieCard from "./MovieCard"
-function MovieSection({ title }){
+function MovieSection({ title, movies }){
     return(
         <section className="space-y-6 py-10">
             {/* Header */}
@@ -13,10 +13,12 @@ function MovieSection({ title }){
 
             {/*Movie List*/}
             <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-                <MovieCard />
-                <MovieCard />
-                <MovieCard />
-                <MovieCard />
+               {movies.map((movie) => (
+                <MovieCard 
+                  key={movie.id}
+                  movie={movie}
+                />
+               ))}
             </div>
         </section>
     )

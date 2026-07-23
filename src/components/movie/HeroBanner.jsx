@@ -1,16 +1,17 @@
 import {Fragment} from "react";
-import heroBg from "../../assets/images/hero-banner.jpg"
-const movieInfo = ["⭐ 8.8", "2023", "Action"]
 
-function HeroBanner(){
+
+function HeroBanner({ movie }){
+    const movieInfo = [`⭐ ${movie.rating}`, movie.year, movie.genre]
     return(
         <section className="relative h-[70vh] max-w-7xl mx-auto w-full flex items-center px-4 rounded-2xl overflow-hidden sm:h-[75vh] md:h-[80vh] sm:px-6">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
             <img 
-            src={heroBg}
-            alt="Oppenheimer poster"
+            src={movie.backdrop}
+            alt={movie.title}
             className="w-full h-full object-cover"
+            loading="eager"
             />
         </div>
 
@@ -22,7 +23,7 @@ function HeroBanner(){
             {/* Movie Info */}
             <div className="flex flex-wrap items-center text-xs gap-2 text-zinc-300 sm:text-sm">
                 {movieInfo.map((item, index)=>(
-                <Fragment key={item}>
+                <Fragment key={index}>
                     {index > 0 && <span>•</span>}
                     <span>{item}</span>
                 </Fragment>
@@ -30,20 +31,19 @@ function HeroBanner(){
             </div>
 
             {/* Title  */}
-            <h1 className="font-bold text-3xl tracking-wide leading-tight sm:text-4xl md:text-5xl">Oppenheimer</h1>
+            <h1 className="font-bold text-3xl tracking-wide leading-tight sm:text-4xl md:text-5xl">{movie.title}</h1>
 
             {/* Overview  */}
-            <p className="text-sm text-zinc-300 max-w-lg leading-relaxed sm:text-base md:text-lg">The story of J. Robert Oppenheimer and the creation of the atomic bomb during World War II.</p>
+            <p className="text-sm text-zinc-300 max-w-lg leading-relaxed sm:text-base md:text-lg">{movie.overview}</p>
 
             {/* Buttons  */}
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                 <button 
-                className="w-full sm:w-auto bg-red-600 font-medium text-white px-6 py-3 border border-red-400 rounded-full hover:bg-red-700 transition-all duration-300 hover:scale-105"
-                type="button"
+                className="w-full cursor-pointer rounded-full border border-red-400 bg-red-600 px-6 py-3 font-medium text-white transition-all duration-300 hover:scale-105 hover:bg-red-700 sm:w-auto"
                 >Watch Trailer</button>
 
                 <button 
-                className="w-full sm:w-auto text-zinc-300 font-medium px-6 py-3 border border-zinc-500 rounded-full hover:bg-zinc-800 hover:border-zinc-300 transition-all duration-300 hover:scale-105"
+                className="w-full cursor-pointer rounded-full border border-zinc-500 px-6 py-3 font-medium text-zinc-300 transition-all duration-300 hover:scale-105 hover:border-zinc-300 hover:bg-zinc-800 sm:w-auto"
                 type="button"
                 >More Info</button>
             </div>
