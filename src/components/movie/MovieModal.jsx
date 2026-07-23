@@ -1,19 +1,20 @@
 import { Play, X } from "lucide-react";
 import { Fragment } from "react";
 
-function MovieModal({ movie }){
+function MovieModal({ movie, onClose }){
     const movieInfo = [`⭐ ${movie.rating}`, movie.year, movie.genre]
     return(
-    <div className="fixed inset-0 z-50 overflow-y-auto flex justify-center items-center">
+    <div className="fixed inset-0 z-50 overflow-y-auto flex justify-center items-center py-8">
         {/*Overlay*/}
         <div className="absolute inset-0 bg-black/70 z-40" aria-hidden="true"></div>
 
         {/*Modal*/}
-        <div className="relative mx-4 max-w-5xl w-full rounded-2xl bg-zinc-900 p-5 shadow-2xl sm:p-6 md:p-8">
+        <div className="relative z-50 mx-4 max-w-5xl w-full rounded-2xl bg-zinc-900 p-5 shadow-2xl sm:p-6 md:p-8">
 
             {/* Close Modal Button */}
             <button
                 type="button"
+                onClick={onClose}
                 aria-label="Close Modal"
                 className="cursor-pointer absolute top-6 right-6 rounded-full p-2 text-zinc-300 transition-all duration-300 hover:bg-zinc-800 hover:text-white"
             >

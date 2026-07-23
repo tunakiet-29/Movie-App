@@ -1,7 +1,7 @@
 import { Heart } from "lucide-react";
 import { useState } from "react";
 
-function MovieCard({ movie }){
+function MovieCard({ movie, onViewDetails }){
     const [isFavorite, setIsFavorite] = useState(false);
 
     return(
@@ -16,14 +16,15 @@ function MovieCard({ movie }){
                 />
             
             {/* Overlay */}
-                <div className="absolute inset-0 bg-black/35 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                <div className="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
 
             {/* View Details */}
                 <div
-                    c className="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300 translate-y-3 group-hover:translate-y-0 group-hover:opacity-100"
+                    className="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300 translate-y-3 group-hover:translate-y-0 group-hover:opacity-100"
                 >
                     <button
                         type="button"
+                        onClick={()=> onViewDetails(movie)}
                         className="cursor-pointer rounded-full bg-red-600 px-5 py-2 font-medium text-white transition-colors duration-300 hover:bg-red-700"
                     >View Details</button>
                 </div>           

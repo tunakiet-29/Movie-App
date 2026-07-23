@@ -1,5 +1,5 @@
 import MovieCard from "./MovieCard"
-function MovieSection({ title, movies }){
+function MovieSection({ title, movies, onViewDetails }){
     return(
         <section className="space-y-6 py-10">
             {/* Header */}
@@ -17,6 +17,7 @@ function MovieSection({ title, movies }){
                 <MovieCard 
                   key={movie.id}
                   movie={movie}
+                  onViewDetails={onViewDetails}
                 />
                ))}
             </div>

@@ -6,8 +6,20 @@ import { trendingMovies } from "../data/movies";
 import { popularMovies } from "../data/movies";
 import { topRatedMovies } from "../data/movies";
 import { upComingMovies } from "../data/movies";
+import { useState } from "react";
+import MovieModal from "../components/movie/MovieModal";
 
 function Home() {
+  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  function handleViewDetails(movie){
+    setSelectedMovie(movie)
+    setIsModalOpen(true)
+  }
+  function handleCloseModal(){
+    setIsModalOpen(false);
+  }
   return (
     <main className="min-h-screen bg-zinc-950 text-white">
       <Navbar />
@@ -19,19 +31,28 @@ function Home() {
       <section id="movies" className="mx-auto max-w-7xl px-6 py-16 space-y-16">
         <MovieSection 
         title="Trending Movies"
-        movies={trendingMovies} />
+        movies={trendingMovies}
+        onViewDetails={handleViewDetails} />
         <MovieSection 
         title="Popular Movies"
-        movies={popularMovies} />
+        movies={popularMovies}
+        onViewDetails={handleViewDetails} />
         <MovieSection 
         title="Top Rated Movies"
-        movies={topRatedMovies} />
+        movies={topRatedMovies}
+        onViewDetails={handleViewDetails} />
         <MovieSection 
         title="Upcoming Movies"
-        movies={upComingMovies}/>
-
+        movies={upComingMovies}
+        onViewDetails={handleViewDetails}/>
       </section>
 
+      {isModalOpen && (
+        <MovieModal 
+          movie={selectedMovie}
+          onClose={handleCloseModal}
+        />
+      )}
       <Footer />
     </main>
   );
