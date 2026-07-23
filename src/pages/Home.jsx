@@ -32,7 +32,6 @@ function Home() {
 
       </section>
 
-
       <Footer />
     </main>
   );
