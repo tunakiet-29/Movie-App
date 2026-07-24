@@ -1,9 +1,10 @@
 import { Heart, Star } from "lucide-react";
 import { useState } from "react";
+import { formatGenres } from "../../utils/genres";
 
-function MovieCard({ movie, onViewDetails }){
+function MovieCard({ movie, onViewDetails, genreMap }){
     const [isFavorite, setIsFavorite] = useState(false);
-
+    const genres = formatGenres(movie.genreIds, genreMap)
     return(
         <div className="group cursor-pointer rounded-xl overflow-hidden bg-zinc-900 shadow-lg transition-all duration-300 hover:shadow-2xl hover:shadow-red-500/20 hover:-translate-y-2 hover:scale-[1.03]">
             {/* Poster */}
@@ -52,7 +53,7 @@ function MovieCard({ movie, onViewDetails }){
 
                 <h3 className="text-base font-semibold sm:text-lg line-clamp-1">{movie.title}</h3>
                 
-                <p className="text-xs text-zinc-400 sm:text-sm">{movie.genre}</p>
+                <p className="text-xs text-zinc-400 sm:text-sm">{genres}</p>
 
             </div>
             

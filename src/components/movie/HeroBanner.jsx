@@ -1,8 +1,9 @@
-import {Fragment} from "react";
+import { Fragment } from "react";
 import { Star } from "lucide-react";
+import { formatGenres } from "../../utils/genres";
 
-
-function HeroBanner({ movie }){
+function HeroBanner({ movie, genreMap }){
+    const genres = formatGenres(movie.genreIds, genreMap)
     const movieInfo = [{
         icon: <Star size={16} className="fill-yellow-400 text-yellow-400"/>,
         value: movie.rating.toFixed(1)
@@ -10,7 +11,12 @@ function HeroBanner({ movie }){
 
     {
         value: movie.year
-    }]
+    },
+
+    {
+        value: genres
+    }
+    ]
     return(
         <section className="relative h-[70vh] max-w-7xl mx-auto w-full flex items-center px-4 rounded-2xl overflow-hidden sm:h-[75vh] md:h-[80vh] sm:px-6">
         {/* Background Image */}

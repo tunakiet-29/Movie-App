@@ -4,12 +4,7 @@ import HeroBanner from "../components/movie/HeroBanner"
 import MovieSection from "../components/movie/MovieSection";
 import { useState, useEffect } from "react";
 import MovieModal from "../components/movie/MovieModal";
-import {
-  getTrendingMovies,
-  getPopularMovies,
-  getTopRatedMovies,
-  getUpcomingMovies,
-} from "../services/tmdb";
+import { getTrendingMovies, getPopularMovies, getTopRatedMovies, getUpcomingMovies, getGenres } from "../services/tmdb";
 function Home() {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -17,16 +12,18 @@ function Home() {
   const [popularMoviesApi, setPopularMoviesApi] = useState([]);
   const [topRatedMoviesApi, setTopRatedMoviesApi] = useState([]);
   const [upcomingMoviesApi, setUpcomingMoviesApi] = useState([]);
-
+  const [genreMap, setGenreMap ] = useState({});
   useEffect(() => {
     async function fetchMovies(){
+      
       try {
         const 
          [
           trending,
           popular,
           topRated,
-          upcoming
+          upcoming,
+          genres
          ]
          = await Promise.all(
           [
@@ -34,12 +31,21 @@ function Home() {
             getPopularMovies(),
             getTopRatedMovies(),
             getUpcomingMovies(),
+            getGenres(),
           ]
-         )
+         );
+        
+        const genresReduce = genres.reduce((acc, genre) => {
+          acc[genre.id] = genre.name;
+          return acc;
+        }, {})
+
+        console.log(genresReduce);
         setTrendingMoviesApi(trending);
         setPopularMoviesApi(popular);
         setTopRatedMoviesApi(topRated);
         setUpcomingMoviesApi(upcoming);
+        setGenreMap(genresReduce)
 
       } catch (error) {
         console.error(error);
@@ -62,7 +68,9 @@ function Home() {
 
       <section id="home" className="mx-auto max-w-7xl px-6 py-20">      
         {trendingMoviesApi.length > 0 && (
-          <HeroBanner movie={trendingMoviesApi[0]} />
+          <HeroBanner 
+          movie={trendingMoviesApi[0]}
+          genreMap={genreMap} />
         )}
       </section>
 
@@ -70,24 +78,32 @@ function Home() {
         <MovieSection 
         title="Trending Movies"
         movies={trendingMoviesApi}
+        genreMap={genreMap}
         onViewDetails={handleViewDetails} />
+
         <MovieSection 
         title="Popular Movies"
         movies={popularMoviesApi}
-        onViewDetails={handleViewDetails} />
+        onViewDetails={handleViewDetails}
+        genreMap={genreMap} />
+
         <MovieSection 
         title="Top Rated Movies"
         movies={topRatedMoviesApi}
-        onViewDetails={handleViewDetails} />
+        onViewDetails={handleViewDetails}
+        genreMap={genreMap} />
+
         <MovieSection 
         title="Upcoming Movies"
         movies={upcomingMoviesApi}
-        onViewDetails={handleViewDetails}/>
+        onViewDetails={handleViewDetails}
+        genreMap={genreMap} />
       </section>
 
       {isModalOpen && (
         <MovieModal 
           movie={selectedMovie}
+          genreMap={genreMap}
           onClose={handleCloseModal}
         />
       )}

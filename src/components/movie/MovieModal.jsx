@@ -1,7 +1,8 @@
 import { Play, X, Star } from "lucide-react";
 import { Fragment } from "react";
+import { formatGenres } from "../../utils/genres";
 
-function MovieModal({ movie, onClose }){
+function MovieModal({ movie, onClose, genreMap }){
     const movieInfo = [
         {
             icon: <Star size={16} className="fill-yellow-400 text-yellow-400" />,
@@ -10,8 +11,10 @@ function MovieModal({ movie, onClose }){
 
         {
             value: movie.year
-        }
+        },
+
     ]
+    const genres = formatGenres(movie.genreIds, genreMap);
     return(
     <div className="fixed inset-0 z-50 overflow-y-auto flex justify-center items-center py-8">
         {/*Overlay*/}
@@ -75,7 +78,7 @@ function MovieModal({ movie, onClose }){
                 {/*Genre*/}
                 <div>
                     <h2 className="text-base font-semibold md:text-lg">Genre</h2>
-                    <p className="text-base text-zinc-300 md:text-lg">{movie.genre}</p>
+                    <p className="text-base text-zinc-300 md:text-lg">{genres}</p>
                 </div>
                 {/*Watch Trailer Button*/}
                 <button
