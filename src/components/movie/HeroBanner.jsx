@@ -1,8 +1,16 @@
 import {Fragment} from "react";
+import { Star } from "lucide-react";
 
 
 function HeroBanner({ movie }){
-    const movieInfo = [`⭐ ${movie.rating}`, movie.year, movie.genre]
+    const movieInfo = [{
+        icon: <Star size={16} className="fill-yellow-400 text-yellow-400"/>,
+        value: movie.rating.toFixed(1)
+    },
+
+    {
+        value: movie.year
+    }]
     return(
         <section className="relative h-[70vh] max-w-7xl mx-auto w-full flex items-center px-4 rounded-2xl overflow-hidden sm:h-[75vh] md:h-[80vh] sm:px-6">
         {/* Background Image */}
@@ -25,7 +33,10 @@ function HeroBanner({ movie }){
                 {movieInfo.map((item, index)=>(
                 <Fragment key={index}>
                     {index > 0 && <span>•</span>}
-                    <span>{item}</span>
+                    <span className="flex items-center gap-1">
+                        {item.icon}
+                        {item.value}
+                    </span>
                 </Fragment>
                 ))}
             </div>

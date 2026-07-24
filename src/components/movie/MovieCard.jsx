@@ -1,4 +1,4 @@
-import { Heart } from "lucide-react";
+import { Heart, Star } from "lucide-react";
 import { useState } from "react";
 
 function MovieCard({ movie, onViewDetails }){
@@ -46,7 +46,7 @@ function MovieCard({ movie, onViewDetails }){
             {/* Info */}
             <div className="p-3 space-y-2 sm:p-4">
                 <div className="flex justify-between text-sm text-zinc-300">
-                    <span>⭐ {movie.rating}</span>
+                    <span className="flex items-center gap-1"><Star size={16} className="fill-yellow-400 text-yellow-400"/>{movie.rating.toFixed(1)}</span>
                     <span>{movie.year}</span>
                 </div>
 

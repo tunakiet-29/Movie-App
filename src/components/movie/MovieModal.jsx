@@ -1,8 +1,17 @@
-import { Play, X } from "lucide-react";
+import { Play, X, Star } from "lucide-react";
 import { Fragment } from "react";
 
 function MovieModal({ movie, onClose }){
-    const movieInfo = [`⭐ ${movie.rating}`, movie.year, movie.genre]
+    const movieInfo = [
+        {
+            icon: <Star size={16} className="fill-yellow-400 text-yellow-400" />,
+            value: movie.rating.toFixed(1)
+        },
+
+        {
+            value: movie.year
+        }
+    ]
     return(
     <div className="fixed inset-0 z-50 overflow-y-auto flex justify-center items-center py-8">
         {/*Overlay*/}
@@ -46,10 +55,13 @@ function MovieModal({ movie, onClose }){
                 <div className="flex items-center gap-2 text-base text-zinc-300 md:text-lg"> 
                     {movieInfo.map((item, index) => (
                         <Fragment
-                            key={item}
+                            key={index}
                         >
                             {index > 0 && <span>•</span>}
-                            <span>{item}</span>
+                            <span className="flex items-center gap-1">
+                                {item.icon}
+                                {item.value}
+                            </span>
                         </Fragment>
                     ))}
                 </div>
