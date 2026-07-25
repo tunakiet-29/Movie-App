@@ -9,7 +9,7 @@ import SkeletonSection from "../components/skeleton/SkeletonSection";
 import SkeletonHero from "../components/skeleton/SkeletonHero";
 import ErrorState from "../components/error/ErrorState";
 import SearchBar from "../components/search/SearchBar";
-
+import EmptyState from "../components/empty/EmptyState";
 function Home() {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -92,12 +92,34 @@ function Home() {
         setIsLoading(false);
       }
     }
+
+    async function fetchSearchMovies(searchQuery){
+      if(!searchQuery.trim()){
+        setSearchResults([]);
+        setSearchError(null);
+        return;
+      }
+
+      setIsSearching(true);
+      setSearchError(null);
+
+      try {
+        const movies = await searchMovies(searchQuery);
+        setSearchResults(movies);
+      } catch (error) {
+        setSearchError(error.message);
+      }
+      finally{
+        setIsSearching(false);
+      }
+    }
+
   useEffect(() => {
     
     fetchMovies()
   }, [])
 
-  {/* Debounce */}
+ //Debounce
   useEffect(() => {
     const timer = setTimeout(()=>{
       setDebouncedQuery(query)
@@ -109,44 +131,20 @@ function Home() {
   }, [query])
 
   useEffect(() => {
-     
-    if(!debouncedQuery.trim()){
-      setSearchResults([]);
-      setSearchError(null);
-      return;
-    }
-
-    async function fetchSearchMovies(){
-       
-
-      setIsSearching(true);
-      setSearchError(null);
-    try {
-      const movies = await searchMovies(debouncedQuery);
-      console.log("Movies:", movies);
-      setSearchResults(movies);
-    } catch (error) {
-      setSearchError(error.message);
-    }
-      finally{
-        setIsSearching(false);
-      }
-    }
-
-    fetchSearchMovies()
-  }, [debouncedQuery])
+    fetchSearchMovies(debouncedQuery);
+  }, [debouncedQuery]);
 
   function handleViewDetails(movie){
     setSelectedMovie(movie);
     setIsModalOpen(true);
-  }
+  };
   function handleCloseModal(){
     setIsModalOpen(false);
-  }
+  };
 
   function handleQueryChange(event){
     setQuery(event.target.value);
-  }
+  };
 
   if(error){
         return(
@@ -192,15 +190,27 @@ function Home() {
           onChange={handleQueryChange}
         />
       </section>
+
       <section id="movies" className="mx-auto max-w-7xl px-6 py-16 space-y-16">
         {isSearchingMode ? (
+          isSearching ? (
+            <SkeletonSection title="Searching Movies..."/>
+          ) : searchError ? (
+            <ErrorState
+              message={searchError}
+              onRetry={() => fetchSearchMovies(debouncedQuery)}
+             />
+          ) : searchResults.length === 0 ? (
+            <EmptyState query={debouncedQuery}/>
+          ) : (
           <MovieSection
-            title={`Search Movies (${searchResults.length})`}
+            title={`Search Results (${searchResults.length})`}
             movies={searchResults}
             genreMap={genreMap}
             onViewDetails={handleViewDetails}
 
           />
+          )
         ) : (movieSection.map((section) => {
           if(isLoading) {
           return (
