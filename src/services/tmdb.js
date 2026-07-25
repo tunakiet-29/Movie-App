@@ -1,6 +1,6 @@
 const API_KEY = import.meta.env.VITE_KEY_API;
 const BASE_URL = "https://api.themoviedb.org/3";
-console.log(API_KEY.slice(0,20));
+
 
 function mapMovie(movie){
        return {
@@ -76,4 +76,28 @@ export async function getGenres(){
         throw error;
     }
 }
+
+export async function searchMovies(query){
+    const url=`${BASE_URL}/search/movie?query=${encodeURIComponent(query)}`;
+
+    try{
+    const res = await fetch(url, {
+        headers:{
+            Authorization: `Bearer ${API_KEY}`,
+            accept: 'application/json'
+        }
+    })
+    if(!res.ok){
+        throw new Error(`HTTP Error: ${res.status}`)
+    }
+
+    const result = await res.json();
+    return result.results.map(mapMovie);
+    
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
 export { API_KEY, BASE_URL};

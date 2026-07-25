@@ -4,10 +4,11 @@ import HeroBanner from "../components/movie/HeroBanner"
 import MovieSection from "../components/movie/MovieSection";
 import { useState, useEffect } from "react";
 import MovieModal from "../components/movie/MovieModal";
-import { getTrendingMovies, getPopularMovies, getTopRatedMovies, getUpcomingMovies, getGenres } from "../services/tmdb";
+import { getTrendingMovies, getPopularMovies, getTopRatedMovies, getUpcomingMovies, getGenres, searchMovies } from "../services/tmdb";
 import SkeletonSection from "../components/skeleton/SkeletonSection";
 import SkeletonHero from "../components/skeleton/SkeletonHero";
 import ErrorState from "../components/error/ErrorState";
+import SearchBar from "../components/search/SearchBar";
 
 function Home() {
   const [selectedMovie, setSelectedMovie] = useState(null);
@@ -19,7 +20,34 @@ function Home() {
   const [genreMap, setGenreMap ] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [query, setQuery] = useState("");
+  const [debouncedQuery, setDebouncedQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchError, setSearchError] = useState(null);
 
+  const isSearchingMode = debouncedQuery.trim() !== "";
+  const movieSection = [
+    {
+      title: "Trending Movies",
+      movies: trendingMoviesApi,
+    },
+
+    {
+      title: "Popular Movies",
+      movies: popularMoviesApi,
+    },
+
+    {
+      title: "Top Rated Movies",
+      movies: topRatedMoviesApi,
+    }
+    ,
+    {
+      title: "Upcoming Movies",
+      movies: upcomingMoviesApi,
+    }
+  ]
   async function fetchMovies(){
       
       setIsLoading(true);
@@ -69,6 +97,44 @@ function Home() {
     fetchMovies()
   }, [])
 
+  {/* Debounce */}
+  useEffect(() => {
+    const timer = setTimeout(()=>{
+      setDebouncedQuery(query)
+    }, 500)
+
+    return ()=> {
+      clearTimeout(timer)
+    }
+  }, [query])
+
+  useEffect(() => {
+     
+    if(!debouncedQuery.trim()){
+      setSearchResults([]);
+      setSearchError(null);
+      return;
+    }
+
+    async function fetchSearchMovies(){
+       
+
+      setIsSearching(true);
+      setSearchError(null);
+    try {
+      const movies = await searchMovies(debouncedQuery);
+      console.log("Movies:", movies);
+      setSearchResults(movies);
+    } catch (error) {
+      setSearchError(error.message);
+    }
+      finally{
+        setIsSearching(false);
+      }
+    }
+
+    fetchSearchMovies()
+  }, [debouncedQuery])
 
   function handleViewDetails(movie){
     setSelectedMovie(movie);
@@ -76,6 +142,10 @@ function Home() {
   }
   function handleCloseModal(){
     setIsModalOpen(false);
+  }
+
+  function handleQueryChange(event){
+    setQuery(event.target.value);
   }
 
   if(error){
@@ -100,77 +170,58 @@ function Home() {
       <NavBar />
 
       <section id="home" className="mx-auto max-w-7xl px-6 py-20">      
-        { isLoading ?(
+        {!isSearchingMode && (
+          isLoading ? (
           <SkeletonHero/>
-        ) : (
-           trendingMoviesApi.length > 0 && (
-            <HeroBanner 
-              movie={trendingMoviesApi[0]}
-              genreMap={genreMap} 
-            />
-           )
-        )
+              ) : (
+                trendingMoviesApi.length > 0 && (
+                  <HeroBanner 
+                  movie={trendingMoviesApi[0]}
+                  genreMap={genreMap} 
+                  />
+                  )
+              )
+          )
        }
+
       </section>
 
-       
+      <section className="mx-auto max-w-7xl px-6 py-8">
+        <SearchBar
+          query={query}
+          onChange={handleQueryChange}
+        />
+      </section>
       <section id="movies" className="mx-auto max-w-7xl px-6 py-16 space-y-16">
-        {
-          isLoading ? (
-            <SkeletonSection title="Trending Movies"/>
-          ) : (
-            <MovieSection
-              title="Trending Movies"
-              movies={trendingMoviesApi}
-              genreMap={genreMap}
-              onViewDetails={handleViewDetails}
+        {isSearchingMode ? (
+          <MovieSection
+            title={`Search Movies (${searchResults.length})`}
+            movies={searchResults}
+            genreMap={genreMap}
+            onViewDetails={handleViewDetails}
 
+          />
+        ) : (movieSection.map((section) => {
+          if(isLoading) {
+          return (
+            <SkeletonSection
+              key={section.title}
+              title={section.title}
             />
-          )
+            );
         }
-
-       {
-          isLoading ? (
-            <SkeletonSection title="Popular Movies"/>
-          ) : (
-            <MovieSection
-              title="Popular Movies"
-              movies={popularMoviesApi}
-              genreMap={genreMap}
-              onViewDetails={handleViewDetails}
-
-            />
-          )
-        }
-
-        {
-          isLoading ? (
-            <SkeletonSection title="Top Rated Movies"/>
-          ) : (
-            <MovieSection
-              title="Top Rated Movies"
-              movies={topRatedMoviesApi}
-              genreMap={genreMap}
-              onViewDetails={handleViewDetails}
-
-            />
-          )
-        }
-
-        {
-          isLoading ? (
-            <SkeletonSection title="Upcoming Movies"/>
-          ) : (
-            <MovieSection
-              title="Upcoming Movies"
-              movies={upcomingMoviesApi}
-              genreMap={genreMap}
-              onViewDetails={handleViewDetails}
-
-            />
-          )
-        }
-
+          return (
+          <MovieSection
+            key={section.title}
+            title={section.title}
+            movies={section.movies}
+            onViewDetails={handleViewDetails}
+            genreMap={genreMap}
+          />
+        )
+      }))} 
+        
+        
       </section>
 
       {isModalOpen && (
