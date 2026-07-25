@@ -18,8 +18,7 @@ function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    async function fetchMovies(){
+  async function fetchMovies(){
       setIsLoading(true);
       setError(null);
       try {
@@ -51,12 +50,18 @@ function Home() {
         setTopRatedMoviesApi(topRated);
         setUpcomingMoviesApi(upcoming);
         setGenreMap(genresReduce);
-        setIsLoading(false);
-      } catch (error) {
+  
+      } 
+      catch (error) {
         setError(error.message);
+        
+      }
+      finally{
         setIsLoading(false);
       }
     }
+  useEffect(() => {
+    
     fetchMovies()
   }, [])
 
