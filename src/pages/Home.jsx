@@ -1,4 +1,4 @@
-import Navbar from "../components/layout/Navbar";
+import NavBar from "../components/layout/NavBar";
 import Footer from "../components/layout/Footer";
 import HeroBanner from "../components/movie/HeroBanner"
 import MovieSection from "../components/movie/MovieSection";
@@ -7,6 +7,8 @@ import MovieModal from "../components/movie/MovieModal";
 import { getTrendingMovies, getPopularMovies, getTopRatedMovies, getUpcomingMovies, getGenres } from "../services/tmdb";
 import SkeletonSection from "../components/skeleton/SkeletonSection";
 import SkeletonHero from "../components/skeleton/SkeletonHero";
+import ErrorState from "../components/error/ErrorState";
+
 function Home() {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,9 +21,11 @@ function Home() {
   const [error, setError] = useState(null);
 
   async function fetchMovies(){
+      
       setIsLoading(true);
       setError(null);
       try {
+          
         const 
          [
           trending,
@@ -73,9 +77,27 @@ function Home() {
   function handleCloseModal(){
     setIsModalOpen(false);
   }
+
+  if(error){
+        return(
+          <main className="min-h-screen bg-zinc-950 text-white">
+            <NavBar />
+
+            <div className="mx-auto flex min-h-[70vh] max-w-7xl items-center justify-center px-6">
+              <ErrorState
+                message={error}
+                onRetry={fetchMovies}
+              />
+            </div>
+
+            <Footer />
+          </main>
+        )
+       }
+
   return (
     <main className="min-h-screen bg-zinc-950 text-white">
-      <Navbar />
+      <NavBar />
 
       <section id="home" className="mx-auto max-w-7xl px-6 py-20">      
         { isLoading ?(
@@ -91,6 +113,7 @@ function Home() {
        }
       </section>
 
+       
       <section id="movies" className="mx-auto max-w-7xl px-6 py-16 space-y-16">
         {
           isLoading ? (
