@@ -178,7 +178,7 @@ During this project, I practiced:
 **Bui Le Tuan Kiet**
 
 - GitHub: https://github.com/tunakiet-29
-- LinkedIn: *(Add your LinkedIn profile)*
+- LinkedIn: https://www.linkedin.com/in/tunakiet/
 
 ---
 
