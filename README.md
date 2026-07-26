@@ -13,21 +13,21 @@ MovieVerse allows users to explore trending, popular, top-rated, and upcoming mo
 ### 🏠 Home
 Browse trending, popular, top-rated, and upcoming movies.
 
-![Home](./assets/images/home-page.png)
+![Home](./src/assets/images/home-page.png)
 
 ---
 
 ### 🎬 Movie Details
 View movie information including overview, genres, rating, and release date.
 
-![Movie Details](./assets/images/movie-details.png)
+![Movie Details](./src/assets/images/movie-details.png)
 
 ---
 
 ### ▶️ Trailer
 Watch the official trailer directly in the application.
 
-![Trailer](./assets/images/trailer-modal.png)
+![Trailer](./src/assets/images/trailer-modal.png)
 
 ---
 
