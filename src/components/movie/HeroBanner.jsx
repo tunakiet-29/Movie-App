@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { Star } from "lucide-react";
 import { formatGenres } from "../../utils/genres";
 
-function HeroBanner({ movie, genreMap }){
+function HeroBanner({ movie, genreMap, onWatchTrailer, onViewDetails }){
     const genres = formatGenres(movie.genreIds, genreMap)
     const movieInfo = [{
         icon: <Star size={16} className="fill-yellow-400 text-yellow-400"/>,
@@ -56,12 +56,15 @@ function HeroBanner({ movie, genreMap }){
             {/* Buttons  */}
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                 <button 
+                type="button"
                 className="w-full cursor-pointer rounded-full border border-red-400 bg-red-600 px-6 py-3 font-medium text-white transition-all duration-300 hover:scale-105 hover:bg-red-700 sm:w-auto"
+                onClick={()=>onWatchTrailer?.(movie)}
                 >Watch Trailer</button>
 
                 <button 
-                className="w-full cursor-pointer rounded-full border border-zinc-500 px-6 py-3 font-medium text-zinc-300 transition-all duration-300 hover:scale-105 hover:border-zinc-300 hover:bg-zinc-800 sm:w-auto"
                 type="button"
+                className="w-full cursor-pointer rounded-full border border-zinc-500 px-6 py-3 font-medium text-zinc-300 transition-all duration-300 hover:scale-105 hover:border-zinc-300 hover:bg-zinc-800 sm:w-auto"
+                onClick={()=>onViewDetails(movie)}
                 >More Info</button>
             </div>
            </div>

@@ -2,7 +2,7 @@ import { Play, X, Star } from "lucide-react";
 import { Fragment } from "react";
 import { formatGenres } from "../../utils/genres";
 
-function MovieModal({ movie, onClose, genreMap }){
+function MovieModal({ movie, onClose, genreMap, onWatchTrailer }){
     const movieInfo = [
         {
             icon: <Star size={16} className="fill-yellow-400 text-yellow-400" />,
@@ -14,6 +14,7 @@ function MovieModal({ movie, onClose, genreMap }){
         },
 
     ]
+
     const genres = formatGenres(movie.genreIds, genreMap);
     return(
     <div className="fixed inset-0 z-50 overflow-y-auto flex justify-center items-center py-8">
@@ -83,9 +84,10 @@ function MovieModal({ movie, onClose, genreMap }){
                 {/*Watch Trailer Button*/}
                 <button
                     type="button"
-                    className="flex w-fit items-center gap-2 cursor-pointer rounded-full border border-red-400 bg-red-600 px-6 py-3 font-medium text-white transition-all duration-300 hover:bg-red-700 hover:scale-105"
+                    className="mt-auto flex w-fit items-center gap-2 cursor-pointer rounded-full border border-red-400 bg-red-600 px-6 py-3 font-medium text-white transition-all duration-300 hover:bg-red-700 hover:scale-105"
+                    onClick={()=>onWatchTrailer?.(movie)}
                 >
-                    <Play size={18} />
+                    <Play size={18} className="fill-white" />
                     <span>Watch Trailer</span>
                 </button>
             </div>    

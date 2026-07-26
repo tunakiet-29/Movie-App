@@ -1,4 +1,4 @@
-import { Clapperboard, Search, Moon, Menu, X } from "lucide-react";
+import { Clapperboard, Moon, Menu, X } from "lucide-react";
 import { useState } from "react";
 
 function Navbar() {
@@ -41,14 +41,7 @@ function Navbar() {
 
         {/* Actions */}
         <div className="hidden md:flex items-center gap-5">
-          <button
-            type="button"
-            className="cursor-pointer transition-colors duration-200 hover:text-red-500"
-            aria-label="Search"
-          >
-            <Search size={22} />
-          </button>
-
+          
           <button
             type="button"
             className="cursor-pointer transition-colors duration-200 hover:text-yellow-400"
@@ -95,14 +88,6 @@ function Navbar() {
             </div>
             
             <div className="flex flex-col items-start px-6 gap-6 mt-6 border-t border-zinc-800 pt-6">
-              <button
-                type="button"
-                className="flex items-center gap-3 cursor-pointer transition-colors duration-200 hover:text-red-500"
-                aria-label="Search"
-              >
-                <Search size={22} />
-                <span>Search</span>
-              </button>
 
               <button
                 type="button"

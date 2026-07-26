@@ -100,4 +100,38 @@ export async function searchMovies(query){
     }
 }
 
+export async function getMovieTrailer(movieId){
+        const url=`${BASE_URL}/movie/${movieId}/videos`;
+
+    try{
+    const res = await fetch(url, {
+        headers:{
+            Authorization: `Bearer ${API_KEY}`,
+            accept: 'application/json'
+        }
+    })
+    if(!res.ok){
+        throw new Error(`HTTP Error: ${res.status}`)
+    }
+
+    const result = await res.json();
+    
+    const trailer = result.results.find(
+        (video) => 
+            video.site === "YouTube" &&
+            video.type === "Trailer" &&
+            video.official
+    ) ||  result.results.find(
+        (video) => 
+            video.site === "YouTube" &&
+            video.type === "Trailer" 
+    )
+    
+    return trailer ?? null;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
 export { API_KEY, BASE_URL};

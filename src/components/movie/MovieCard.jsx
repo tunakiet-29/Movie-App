@@ -2,7 +2,7 @@ import { Heart, Star } from "lucide-react";
 import { useState } from "react";
 import { formatGenres } from "../../utils/genres";
 
-function MovieCard({ movie, onViewDetails, genreMap }){
+function MovieCard({ movie, onViewDetails, genreMap}){
     const [isFavorite, setIsFavorite] = useState(false);
     const genres = formatGenres(movie.genreIds, genreMap)
     return(

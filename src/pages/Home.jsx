@@ -4,12 +4,14 @@ import HeroBanner from "../components/movie/HeroBanner"
 import MovieSection from "../components/movie/MovieSection";
 import { useState, useEffect } from "react";
 import MovieModal from "../components/movie/MovieModal";
-import { getTrendingMovies, getPopularMovies, getTopRatedMovies, getUpcomingMovies, getGenres, searchMovies } from "../services/tmdb";
+import { getTrendingMovies, getPopularMovies, getTopRatedMovies, getUpcomingMovies, getGenres, searchMovies, getMovieTrailer } from "../services/tmdb";
 import SkeletonSection from "../components/skeleton/SkeletonSection";
 import SkeletonHero from "../components/skeleton/SkeletonHero";
 import ErrorState from "../components/error/ErrorState";
 import SearchBar from "../components/search/SearchBar";
 import EmptyState from "../components/empty/EmptyState";
+import TrailerModal from "../components/movie/TrailerModal";
+
 function Home() {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,7 +27,8 @@ function Home() {
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [searchError, setSearchError] = useState(null);
-
+  const [trailer, setTrailer] = useState(null);
+  const [isTrailerOpen, setIsTrailerOpen] = useState(false);
   const isSearchingMode = debouncedQuery.trim() !== "";
   const movieSection = [
     {
@@ -119,7 +122,7 @@ function Home() {
     fetchMovies()
   }, [])
 
- //Debounce
+ /* ---------------- Debounce ---------------- */
   useEffect(() => {
     const timer = setTimeout(()=>{
       setDebouncedQuery(query)
@@ -134,12 +137,35 @@ function Home() {
     fetchSearchMovies(debouncedQuery);
   }, [debouncedQuery]);
 
+ /* ---------------- Trailer ---------------- */
+  async function handleWatchTrailer(movie){
+    setTrailer(null);
+    try {
+      const trailerData = await getMovieTrailer(movie.id)
+
+      if(!trailerData){
+        alert("Trailer is not available");
+        return;
+      }
+
+      setTrailer(trailerData);
+      setIsTrailerOpen(true);
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  function handleCloseTrailer(){
+    setIsTrailerOpen(false);
+    setTrailer(null);
+  }
   function handleViewDetails(movie){
     setSelectedMovie(movie);
     setIsModalOpen(true);
   };
   function handleCloseModal(){
     setIsModalOpen(false);
+    setSelectedMovie(null);
   };
 
   function handleQueryChange(event){
@@ -176,6 +202,8 @@ function Home() {
                   <HeroBanner 
                   movie={trendingMoviesApi[0]}
                   genreMap={genreMap} 
+                  onWatchTrailer={handleWatchTrailer}
+                  onViewDetails={handleViewDetails}
                   />
                   )
               )
@@ -208,7 +236,7 @@ function Home() {
             movies={searchResults}
             genreMap={genreMap}
             onViewDetails={handleViewDetails}
-
+           
           />
           )
         ) : (movieSection.map((section) => {
@@ -227,6 +255,7 @@ function Home() {
             movies={section.movies}
             onViewDetails={handleViewDetails}
             genreMap={genreMap}
+
           />
         )
       }))} 
@@ -239,6 +268,14 @@ function Home() {
           movie={selectedMovie}
           genreMap={genreMap}
           onClose={handleCloseModal}
+          onWatchTrailer={handleWatchTrailer}
+        />
+      )}
+
+      {isTrailerOpen && trailer && (
+        <TrailerModal
+          trailer={trailer}
+          onClose={handleCloseTrailer}
         />
       )}
       <Footer />
