@@ -31,26 +31,27 @@ function Home() {
   const [isTrailerOpen, setIsTrailerOpen] = useState(false);
   const isSearchingMode = debouncedQuery.trim() !== "";
   const movieSection = [
-    {
-      title: "Trending Movies",
-      movies: trendingMoviesApi,
-    },
-
-    {
-      title: "Popular Movies",
-      movies: popularMoviesApi,
-    },
-
-    {
-      title: "Top Rated Movies",
-      movies: topRatedMoviesApi,
-    }
-    ,
-    {
-      title: "Upcoming Movies",
-      movies: upcomingMoviesApi,
-    }
-  ]
+  {
+    title: "Trending Movies",
+    category: "trending",
+    movies: trendingMoviesApi,
+  },
+  {
+    title: "Popular Movies",
+    category: "popular",
+    movies: popularMoviesApi,
+  },
+  {
+    title: "Top Rated Movies",
+    category: "top-rated",
+    movies: topRatedMoviesApi,
+  },
+  {
+    title: "Upcoming Movies",
+    category: "upcoming",
+    movies: upcomingMoviesApi,
+  },
+];
   async function fetchMovies(){
       
       setIsLoading(true);
@@ -253,6 +254,7 @@ function Home() {
             key={section.title}
             title={section.title}
             movies={section.movies}
+            category={section.category}
             onViewDetails={handleViewDetails}
             genreMap={genreMap}
 
