@@ -1,16 +1,187 @@
-# React + Vite
+# 🎬 MovieVerse
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern movie discovery web application built with **React**, **Vite**, **Tailwind CSS**, and the **TMDB API**.
 
-Currently, two official plugins are available:
+MovieVerse allows users to explore trending, popular, top-rated, and upcoming movies, search for titles, view detailed information, and watch official trailers through a clean and responsive interface.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+> **Repository:** Movie-App
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📸 Preview
 
-## Expanding the ESLint configuration
+### 🏠 Home
+Browse trending, popular, top-rated, and upcoming movies.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+![Home](./assets/images/home-page.png)
+
+---
+
+### 🎬 Movie Details
+View movie information including overview, genres, rating, and release date.
+
+![Movie Details](./assets/images/movie-details.png)
+
+---
+
+### ▶️ Trailer
+Watch the official trailer directly in the application.
+
+![Trailer](./assets/images/trailer-modal.png)
+
+---
+
+## ✨ Features
+
+- 🎬 Browse Trending Movies
+- ⭐ Browse Popular Movies
+- 🔥 Browse Top Rated Movies
+- 📅 Browse Upcoming Movies
+- 🔍 Search movies in real time
+- 🎥 Watch official trailers
+- 📖 View movie details in a modal
+- 🎭 Display movie genres
+- ⚡ Loading skeletons
+- ❌ Error handling with retry
+- 📱 Fully responsive design
+- 🎨 Modern dark UI with Tailwind CSS
+
+---
+
+## 🛠 Tech Stack
+
+### Frontend
+
+- React
+- React Router
+- Vite
+- Tailwind CSS
+- Lucide React
+
+### API
+
+- TMDB API
+
+### Tools
+
+- Git
+- GitHub
+- VS Code
+- Vercel
+
+---
+
+## 📂 Project Structure
+
+```text
+src
+│
+├── assets
+│
+├── components
+│   ├── empty
+│   ├── error
+│   ├── layout
+│   ├── movie
+│   ├── search
+│   └── skeleton
+│
+├── pages
+│   ├── Home.jsx
+│   └── MoviesPage.jsx
+│
+├── services
+│   └── tmdb.js
+│
+├── App.jsx
+└── main.jsx
+```
+
+---
+
+## 🚀 Getting Started
+
+Clone the repository
+
+```bash
+git clone https://github.com/tunakiet-29/Movie-App.git
+```
+
+Go to project
+
+```bash
+cd Movie-App
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Run development server
+
+```bash
+npm run dev
+```
+
+---
+
+## 🌐 Live Demo
+
+Coming Soon...
+
+---
+
+## 🎥 API
+
+This project uses **The Movie Database (TMDB)** API.
+
+https://developer.themoviedb.org/
+
+---
+
+## 📚 What I Learned
+
+During this project, I practiced:
+
+- React Component Architecture
+- React Router
+- API Integration
+- Promise.all()
+- Async / Await
+- Error Handling
+- Loading Skeleton UI
+- Search Debouncing
+- Modal Management
+- Responsive Design
+- Tailwind CSS Layout
+- State Management using useState & useEffect
+
+---
+
+## 🚀 Future Improvements
+
+- ❤️ Favorite Movies
+- 🎭 Filter by Genre
+- 📃 Pagination
+- 🔐 Authentication
+- ⭐ Personal Watchlist
+- 🌙 Theme Switcher
+- 🎬 Similar Movies
+- 🎞 Movie Recommendations
+
+---
+
+## 👨‍💻 Author
+
+**Bui Le Tuan Kiet**
+
+- GitHub: https://github.com/tunakiet-29
+- LinkedIn: *(Add your LinkedIn profile)*
+
+---
+
+## 📄 License
+
+This project is for learning and portfolio purposes.
