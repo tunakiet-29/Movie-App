@@ -1,4 +1,4 @@
-const API_KEY = import.meta.env.VITE_KEY_API;
+const ACCESS_TOKEN = import.meta.env.VITE_TMDB_ACCESS_TOKEN;
 const BASE_URL = "https://api.themoviedb.org/3";
 
 
@@ -21,7 +21,7 @@ async function fetchMovie(endpoint){
     try{
     const res = await fetch(url, {
         headers:{
-            Authorization: `Bearer ${API_KEY}`,
+            Authorization: `Bearer ${ACCESS_TOKEN}`,
             accept: 'application/json'
         }
     })
@@ -60,7 +60,7 @@ export async function getGenres(){
     try{
     const res = await fetch(url, {
         headers:{
-            Authorization: `Bearer ${API_KEY}`,
+            Authorization: `Bearer ${ACCESS_TOKEN}`,
             accept: 'application/json'
         }
     })
@@ -83,7 +83,7 @@ export async function searchMovies(query){
     try{
     const res = await fetch(url, {
         headers:{
-            Authorization: `Bearer ${API_KEY}`,
+            Authorization: `Bearer ${ACCESS_TOKEN}`,
             accept: 'application/json'
         }
     })
@@ -106,7 +106,7 @@ export async function getMovieTrailer(movieId){
     try{
     const res = await fetch(url, {
         headers:{
-            Authorization: `Bearer ${API_KEY}`,
+            Authorization: `Bearer ${ACCESS_TOKEN}`,
             accept: 'application/json'
         }
     })
@@ -134,4 +134,4 @@ export async function getMovieTrailer(movieId){
     }
 }
 
-export { API_KEY, BASE_URL};
+export { ACCESS_TOKEN, BASE_URL};
