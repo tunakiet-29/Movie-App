@@ -129,7 +129,7 @@ npm run dev
 
 ## 🌐 Live Demo
 
-Coming Soon...
+https://movieverse-web.vercel.app/
 
 ---
 
