@@ -12,7 +12,7 @@ function MovieCard({ movie, onViewDetails, genreMap}){
                  <img 
                     src= {movie.poster}
                     alt= {movie.title}
-                    className="w-full aspect-[2/3] object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full aspect-2/3 object-cover transition-transform duration-500 group-hover:scale-110"
                     loading="lazy" 
                 />
             
