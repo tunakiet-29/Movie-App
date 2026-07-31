@@ -45,6 +45,7 @@ Watch the official trailer directly in the application.
 - ❌ Error handling with retry
 - 📱 Fully responsive design
 - 🎨 Modern dark UI with Tailwind CSS
+- ❤️ Favorite Movies
 
 ---
 
@@ -162,7 +163,6 @@ During this project, I practiced:
 
 ## 🚀 Future Improvements
 
-- ❤️ Favorite Movies
 - 🎭 Filter by Genre
 - 📃 Pagination
 - 🔐 Authentication
