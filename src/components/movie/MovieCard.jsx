@@ -1,10 +1,13 @@
 import { Heart, Star } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { formatGenres } from "../../utils/genres";
-
+import { isFavorite, toggleFavorite } from "../../utils/favorites";
 function MovieCard({ movie, onViewDetails, genreMap }) {
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavoriteMovie, setIsFavoriteMovie] = useState(false);
 
+  useEffect(()=>{
+    setIsFavoriteMovie(isFavorite(movie.id));
+  }, [movie.id])
   const genres = formatGenres(movie.genreIds, genreMap);
 
   return (
@@ -31,7 +34,7 @@ function MovieCard({ movie, onViewDetails, genreMap }) {
           alt={movie.title}
           loading="lazy"
           className="
-            aspect-[2/3]
+            aspect-2/3
             w-full
             object-cover
             transition-transform
@@ -71,7 +74,10 @@ function MovieCard({ movie, onViewDetails, genreMap }) {
         >
           <button
             type="button"
-            onClick={() => onViewDetails(movie)}
+            onClick={(e) => {
+                e.stopPropagation();
+                onViewDetails(movie);
+            }}
             className="
               cursor-pointer
               rounded-full
@@ -93,11 +99,16 @@ function MovieCard({ movie, onViewDetails, genreMap }) {
         <button
           type="button"
           aria-label={
-            isFavorite
+            isFavoriteMovie
               ? "Remove from favorites"
               : "Add to favorites"
           }
-          onClick={() => setIsFavorite((prev) => !prev)}
+          onClick={(e)=>{
+            e.stopPropagation();
+
+            const state= toggleFavorite(movie);
+            setIsFavoriteMovie(state);
+          }}
           className="
             absolute
             top-3
@@ -113,12 +124,15 @@ function MovieCard({ movie, onViewDetails, genreMap }) {
         >
           <Heart
             size={18}
-            className={
-              isFavorite
+            fill={isFavoriteMovie ? "currentColor" : "none"}
+            className={`
+                transition-colors duration-300
+                ${
+              isFavoriteMovie
                 ? "text-red-500"
                 : "text-white group-hover:text-red-300"
-            }
-            fill={isFavorite ? "currentColor" : "none"}
+            }`}
+            
           />
         </button>
       </div>

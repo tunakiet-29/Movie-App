@@ -1,6 +1,6 @@
 import { Clapperboard, Moon, Menu, X } from "lucide-react";
 import { useState } from "react";
-
+import { Link } from "react-router-dom";
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -31,12 +31,12 @@ function Navbar() {
             Movies
           </a>
 
-          <a
-            href="#"
+          <Link
+            to="/favorites"
             className="transition-colors duration-200 hover:text-red-500"
           >
             Favorites
-          </a>
+          </Link>
         </div>
 
         {/* Actions */}
@@ -80,11 +80,11 @@ function Navbar() {
                 className="w-full transition-colors duration-200 hover:text-red-500"
               >Movies</a>
 
-              <a 
-                href="#" 
+              <Link 
+                to="/favorites"
                 onClick={()=>setIsOpen(false)}
                 className="w-full transition-colors duration-200 hover:text-red-500"
-              >Favorites</a>
+              >Favorites</Link>
             </div>
             
             <div className="flex flex-col items-start px-6 gap-6 mt-6 border-t border-zinc-800 pt-6">

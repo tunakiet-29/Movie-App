@@ -1,5 +1,5 @@
 import { Clapperboard } from "lucide-react";
-
+import { Link } from "react-router-dom";
 function Footer() {
   return (
     <footer className="border-t border-zinc-800 bg-zinc-950">
@@ -31,10 +31,11 @@ function Footer() {
         className="transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:text-white"
         >Movies</a>
 
-        <a 
-        href="#"
+        <Link 
+        to="/favorites"
         className="transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:text-white"
-        >Favorites</a>
+        >Favorites
+        </Link>
       </nav>
 
       {/* Copyright */}
