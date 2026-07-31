@@ -57,7 +57,6 @@ function MovieModal({
           <X size={20} />
         </button>
 
-<<<<<<< HEAD
         {/* Grid */}
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           {/* Poster */}
@@ -66,10 +65,6 @@ function MovieModal({
             alt={movie.title}
             className="max-h-[70vh] w-full rounded-xl object-cover"
           />
-=======
-        {/*Modal*/}
-        <div className="relative z-50 mx-4 w-full max-w-sm md:max-w-5xl max-h-[90vh] overflow-hidden rounded-2xl bg-zinc-900 p-4 sm:p-6 md:p-8 shadow-2xl">
->>>>>>> update/readme
 
           {/* Info */}
           <div className="flex flex-col gap-5">
