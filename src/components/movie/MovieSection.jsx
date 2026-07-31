@@ -4,18 +4,18 @@ function MovieSection({ title, movies, onViewDetails, genreMap, category }){
     return(
         <section className="space-y-6 py-10">
             {/* Header */}
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <h2 className="text-2xl font-bold">{title}</h2>
+            <div className="flex items-center justify-between">
+                <h2 className="text-2xl font-bold sm:text-2xl">{title}</h2>
                 <Link
                     to={`/movies/${category}`}
-                    className="font-medium text-red-500 transition-colors hover:text-red-400"
+                    className="text-sm font-medium text-red-500 transition-colors hover:text-red-400 sm:text-base"
                 >
                     View All
                 </Link>
             </div>
 
             {/*Movie List*/}
-            <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-8">
                {movies.map((movie) => (
                 <MovieCard 
                   key={movie.id}
