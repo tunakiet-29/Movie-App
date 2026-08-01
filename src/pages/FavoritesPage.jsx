@@ -75,7 +75,7 @@ function FavoritesPage() {
   }
 
   return (
-    <main className="min-h-screen bg-zinc-950 text-white">
+    <main className="min-h-screen bg-zinc-100 text-zinc-900 transition-colors duaration-300 dark:bg-zinc-950 dark:text-white">
       <NavBar />
 
       <section className="mx-auto max-w-7xl px-6 py-24">

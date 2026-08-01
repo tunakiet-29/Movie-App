@@ -1,16 +1,18 @@
-import { Clapperboard, Moon, Menu, X } from "lucide-react";
+import { Clapperboard, Moon, Sun, Menu, X } from "lucide-react";
 import { useState } from "react";
+import { useTheme } from "../../context/ThemeContext";
 import { Link } from "react-router-dom";
 function Navbar() {
+  const { theme, toggleTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <nav className="border-b border-zinc-800 bg-zinc-950" aria-label="Main navigation">
+    <nav className="border-b border-zinc-200 bg-white transition-colors duration-300 dark:bg-zinc-950 dark:border-zinc-800" aria-label="Main navigation">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         {/* Logo */}
         <a href="#home" className="flex items-center gap-2">
           <Clapperboard className="h-8 w-8 text-red-500" />
 
-          <h1 className="text-2xl font-bold tracking-wide">
+          <h1 className="text-2xl font-bold tracking-wide text-zinc-900 dark:text-white">
             Movie<span className="text-red-500">Verse</span>
           </h1>
         </a>
@@ -19,21 +21,21 @@ function Navbar() {
         <div className="hidden md:flex items-center gap-8 text-sm font-medium">
           <a
             href="#home"
-            className="transition-colors duration-200 hover:text-red-500"
+            className="text-zinc-700 transition-colors duration-200 hover:text-red-500 dark:text-zinc-300"
           >
             Home
           </a>
 
           <a
             href="#movies"
-            className="transition-colors duration-200 hover:text-red-500"
+            className="text-zinc-700 transition-colors duration-200 hover:text-red-500 dark:text-zinc-300"
           >
             Movies
           </a>
 
           <Link
             to="/favorites"
-            className="transition-colors duration-200 hover:text-red-500"
+            className="text-zinc-700 transition-colors duration-200 hover:text-red-500 dark:text-zinc-300"
           >
             Favorites
           </Link>
@@ -46,8 +48,11 @@ function Navbar() {
             type="button"
             className="cursor-pointer transition-colors duration-200 hover:text-yellow-400"
             aria-label="Toggle Theme"
+            onClick={toggleTheme}
           >
-            <Moon size={22} />
+            {
+              theme === 'dark' ? <Sun size={22} /> : <Moon size={22} />
+            }
           </button>
         </div>
 
@@ -66,7 +71,7 @@ function Navbar() {
       {/* Mobile menu */}
 
         {isOpen && (
-          <div className="md:hidden border-t bg-zinc-950">
+          <div className="md:hidden border-t border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950">
             <div className="flex flex-col items-start gap-6 px-6 py-5">
               <a 
                 href="#home" 

@@ -129,7 +129,7 @@ function MoviesPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-zinc-950 text-white">
+      <main className="min-h-screen bg-zinc-100 text-zinc-900 transition-colors duaration-300 dark:bg-zinc-950 dark:text-white">
         <NavBar />
 
         <section className="mx-auto max-w-7xl px-6 py-24">
@@ -143,7 +143,7 @@ function MoviesPage() {
 
   if (error) {
     return (
-      <main className="min-h-screen bg-zinc-950 text-white">
+      <main className="min-h-screen bg-zinc-100 text-zinc-900 transition-colors duaration-300 dark:bg-zinc-950 dark:text-white">
         <NavBar />
 
         <div className="mx-auto flex min-h-[70vh] max-w-7xl items-center justify-center px-6">
@@ -159,7 +159,7 @@ function MoviesPage() {
   }
 
   return (
-    <main className="min-h-screen bg-zinc-950 text-white">
+    <main className="min-h-screen bg-zinc-100 text-zinc-900 transition-colors duaration-300 dark:bg-zinc-950 dark:text-white">
       <NavBar />
 
       <section className="mx-auto max-w-7xl px-6 py-24">

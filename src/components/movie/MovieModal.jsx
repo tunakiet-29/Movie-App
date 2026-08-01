@@ -34,7 +34,7 @@ function MovieModal({
       />
 
       {/* Modal */}
-      <div className="relative z-50 mx-4 w-full max-w-5xl rounded-2xl bg-zinc-900 p-5 shadow-2xl sm:p-6 md:p-8">
+      <div className="relative z-50 mx-4 w-full max-w-5xl rounded-2xl bg-white p-5 shadow-2xl transition-colors duration-300 dark:bg-zinc-900 sm:p-6 md:p-8">
         {/* Close Button */}
         <button
           type="button"
@@ -42,16 +42,21 @@ function MovieModal({
           aria-label="Close Modal"
           className="
             absolute
-            top-6
-            right-6
+            top-3
+            right-3
             cursor-pointer
             rounded-full
             p-2
-            text-zinc-300
+            text-zinc-600
             transition-all
             duration-300
-            hover:bg-zinc-800
-            hover:text-white
+            hover:bg-zinc-200
+            hover:text-zinc-900
+            dark:text-zinc-300
+            dark:hover:bg-zinc-800
+            dark:hover:text-white
+            md:top-6
+            md:right-6
           "
         >
           <X size={20} />
@@ -69,12 +74,12 @@ function MovieModal({
           {/* Info */}
           <div className="flex flex-col gap-5">
             {/* Title */}
-            <h1 className="text-2xl font-bold md:text-3xl">
+            <h1 className="text-2xl font-bold text-zinc-900 md:text-3xl dark:text-white">
               {movie.title}
             </h1>
 
             {/* Rating - Year */}
-            <div className="flex items-center gap-2 text-base text-zinc-300 md:text-lg">
+            <div className="flex items-center gap-2 text-base text-zinc-600 md:text-lg dark:text-zinc-300">
               {movieInfo.map((item, index) => (
                 <Fragment key={index}>
                   {index > 0 && <span>•</span>}
@@ -89,22 +94,22 @@ function MovieModal({
 
             {/* Overview */}
             <div>
-              <h2 className="text-base font-semibold md:text-lg">
+              <h2 className="text-base font-semibold text-zinc-900 dark:text-white md:text-lg">
                 Overview
               </h2>
 
-              <p className="max-h-40 max-w-lg overflow-y-auto text-base text-zinc-300 md:text-lg">
+              <p className="max-h-40 max-w-lg overflow-y-auto text-base text-zinc-600 dark:text-zinc-300 md:text-lg">
                 {movie.overview}
               </p>
             </div>
 
             {/* Genre */}
             <div>
-              <h2 className="text-base font-semibold md:text-lg">
+              <h2 className="text-base font-semibold text-zinc-900 dark:text-white md:text-lg">
                 Genre
               </h2>
 
-              <p className="text-base text-zinc-300 md:text-lg">
+              <p className="text-base text-zinc-600 dark:text-zinc-300 md:text-lg">
                 {genres}
               </p>
             </div>

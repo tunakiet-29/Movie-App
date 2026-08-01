@@ -17,7 +17,7 @@ function MovieCard({ movie, onViewDetails, genreMap }) {
         cursor-pointer
         overflow-hidden
         rounded-xl
-        bg-zinc-900
+        bg-white
         shadow-lg
         transition-all
         duration-300
@@ -25,6 +25,7 @@ function MovieCard({ movie, onViewDetails, genreMap }) {
         hover:scale-[1.03]
         hover:shadow-2xl
         hover:shadow-red-500/20
+        dark:bg-zinc-900
       "
     >
       {/* Poster */}
@@ -139,7 +140,7 @@ function MovieCard({ movie, onViewDetails, genreMap }) {
 
       {/* Info */}
       <div className="space-y-2 p-3 sm:p-4">
-        <div className="flex justify-between text-sm text-zinc-300">
+        <div className="flex justify-between text-sm text-zinc-600 dark:text-zinc-300">
           <span className="flex items-center gap-1">
             <Star
               size={16}
@@ -151,11 +152,11 @@ function MovieCard({ movie, onViewDetails, genreMap }) {
           <span>{movie.year}</span>
         </div>
 
-        <h3 className="line-clamp-1 text-base font-semibold sm:text-lg">
+        <h3 className="line-clamp-1 text-base font-semibold text-zinc-900 sm:text-lg dark:text-white">
           {movie.title}
         </h3>
 
-        <p className="text-xs text-zinc-400 sm:text-sm">
+        <p className="text-xs text-zinc-500 sm:text-sm dark:text-zinc-400">
           {genres}
         </p>
       </div>
