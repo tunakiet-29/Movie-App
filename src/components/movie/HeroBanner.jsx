@@ -48,7 +48,7 @@ function HeroBanner({ movie, genreMap, onWatchTrailer, onViewDetails }){
             </div>
 
             {/* Title  */}
-            <h1 className="font-bold text-3xl tracking-wide leading-tight sm:text-4xl md:text-5xl">{movie.title}</h1>
+            <h1 className="font-bold text-3xl tracking-wide leading-tight text-white sm:text-4xl md:text-5xl">{movie.title}</h1>
 
             {/* Overview  */}
             <p className="text-sm text-zinc-300 max-w-lg leading-relaxed sm:text-base md:text-lg">{movie.overview}</p>
