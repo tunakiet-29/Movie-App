@@ -10,7 +10,7 @@ import TrailerModal from "../components/movie/TrailerModal";
 
 import SkeletonSection from "../components/skeleton/SkeletonSection";
 import ErrorState from "../components/error/ErrorState";
-
+import BackButton from "../components/common/BackButton";
 import {
   getGenres,
   getMovieTrailer,
@@ -129,10 +129,11 @@ function MoviesPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-zinc-100 text-zinc-900 transition-colors duaration-300 dark:bg-zinc-950 dark:text-white">
+      <main className="min-h-screen bg-zinc-100 text-zinc-900 transition-colors duration-300 dark:bg-zinc-950 dark:text-white">
         <NavBar />
 
         <section className="mx-auto max-w-7xl px-6 py-24">
+          <BackButton />
           <SkeletonSection title={categoryTitle[category]} />
         </section>
 
@@ -143,15 +144,19 @@ function MoviesPage() {
 
   if (error) {
     return (
-      <main className="min-h-screen bg-zinc-100 text-zinc-900 transition-colors duaration-300 dark:bg-zinc-950 dark:text-white">
+      <main className="min-h-screen bg-zinc-100 text-zinc-900 transition-colors duration-300 dark:bg-zinc-950 dark:text-white">
         <NavBar />
 
-        <div className="mx-auto flex min-h-[70vh] max-w-7xl items-center justify-center px-6">
-          <ErrorState
-            message={error}
-            onRetry={fetchMovies}
-          />
-        </div>
+        <section className="mx-auto max-w-7xl px-6 py-24">
+          <BackButton />
+
+          <div className="flex min-h-[60vh] items-center justify-center">
+            <ErrorState
+                message={error}
+                onRetry={fetchMovies}
+            />
+          </div>
+        </section>
 
         <Footer />
       </main>
@@ -163,6 +168,7 @@ function MoviesPage() {
       <NavBar />
 
       <section className="mx-auto max-w-7xl px-6 py-24">
+        <BackButton />
         {/* Category */}
         <h1 className="text-center text-4xl font-bold">
           {categoryTitle[category] ?? "Movies"}

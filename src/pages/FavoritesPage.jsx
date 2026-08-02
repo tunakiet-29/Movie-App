@@ -8,7 +8,8 @@ import TrailerModal from "../components/movie/TrailerModal";
 
 import { getFavorites } from "../utils/favorites";
 import { getGenres, getMovieTrailer } from "../services/tmdb";
-
+import BackButton from "../components/common/BackButton";
+import { HeartCrack } from "lucide-react";
 function FavoritesPage() {
   const [favorites, setFavorites] = useState([]);
   const [genreMap, setGenreMap] = useState({});
@@ -75,21 +76,28 @@ function FavoritesPage() {
   }
 
   return (
-    <main className="min-h-screen bg-zinc-100 text-zinc-900 transition-colors duaration-300 dark:bg-zinc-950 dark:text-white">
+    <main className="min-h-screen bg-zinc-100 text-zinc-900 transition-colors duration-300 dark:bg-zinc-950 dark:text-white">
       <NavBar />
 
       <section className="mx-auto max-w-7xl px-6 py-24">
+        <BackButton />
+
         <h1 className="text-center text-4xl font-bold">
           Favorite Movies
         </h1>
 
         {favorites.length === 0 ? (
           <div className="mt-16 text-center">
+            <HeartCrack
+                size={56}
+                className="mx-auto text-zinc-400 dark:text-zinc-500"
+            />
+
             <h2 className="text-2xl font-semibold">
               No favorite movies yet.
             </h2>
 
-            <p className="mt-3 text-zinc-400">
+            <p className="mt-3 text-zinc-600 dark:text-zinc-400">
               Add your favorite movies by clicking the heart icon.
             </p>
           </div>
