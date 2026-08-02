@@ -34,7 +34,7 @@ function MovieModal({
       />
 
       {/* Modal */}
-      <div className="relative z-50 mx-4 w-full max-w-5xl rounded-2xl bg-white p-5 shadow-2xl transition-colors duration-300 dark:bg-zinc-900 sm:p-6 md:p-8">
+      <div className="relative z-50 mx-4 w-full max-w-sm md:max-w-5xl rounded-2xl bg-white p-5 shadow-2xl transition-colors duration-300 dark:bg-zinc-900 sm:p-6 md:p-8">
         {/* Close Button */}
         <button
           type="button"
@@ -63,23 +63,23 @@ function MovieModal({
         </button>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+        <div className="grid grid-cols-[110px_1fr] gap-4 md:grid-cols-2 md:gap-8">
           {/* Poster */}
           <img
             src={movie.poster}
             alt={movie.title}
-            className="max-h-[70vh] w-full rounded-xl object-cover"
+            className="h-41.25 w-27.5 rounded-xl object-cover md:h-auto md:w-auto md:max-h-[70vh]"
           />
 
           {/* Info */}
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-3 md:gap-5">
             {/* Title */}
-            <h1 className="text-2xl font-bold text-zinc-900 md:text-3xl dark:text-white">
+            <h1 className="text-lg font-bold text-zinc-900 md:text-3xl dark:text-white">
               {movie.title}
             </h1>
 
             {/* Rating - Year */}
-            <div className="flex items-center gap-2 text-base text-zinc-600 md:text-lg dark:text-zinc-300">
+            <div className="flex items-center gap-2 text-sm text-zinc-600 md:text-lg dark:text-zinc-300">
               {movieInfo.map((item, index) => (
                 <Fragment key={index}>
                   {index > 0 && <span>•</span>}
@@ -98,7 +98,7 @@ function MovieModal({
                 Overview
               </h2>
 
-              <p className="max-h-40 max-w-lg overflow-y-auto text-base text-zinc-600 dark:text-zinc-300 md:text-lg">
+              <p className="max-h-24 md:max-h-40 max-w-lg overflow-y-auto text-base text-zinc-600 dark:text-zinc-300 md:text-lg">
                 {movie.overview}
               </p>
             </div>
@@ -129,8 +129,10 @@ function MovieModal({
                 border
                 border-red-400
                 bg-red-600
-                px-6
-                py-3
+                px-4
+                py-2.5
+                md:px-6
+                md:py-3
                 font-medium
                 text-white
                 transition-all

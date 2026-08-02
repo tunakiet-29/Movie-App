@@ -21,10 +21,10 @@ function MovieCard({ movie, onViewDetails, genreMap }) {
         shadow-lg
         transition-all
         duration-300
-        hover:-translate-y-2
-        hover:scale-[1.03]
-        hover:shadow-2xl
-        hover:shadow-red-500/20
+        sm:hover:-translate-y-2
+        sm:hover:scale-[1.03]
+        sm:hover:shadow-2xl
+        sm:hover:shadow-red-500/20
         dark:bg-zinc-900
       "
     >
@@ -112,11 +112,14 @@ function MovieCard({ movie, onViewDetails, genreMap }) {
           }}
           className="
             absolute
-            top-3
-            right-3
+            top-2
+            right-2
+            p-1.5
+            sm:top-3
+            sm:right-3
+            sm:p-2
             rounded-full
             bg-black/50
-            p-2
             transition-all
             duration-300
             hover:scale-110
@@ -124,7 +127,7 @@ function MovieCard({ movie, onViewDetails, genreMap }) {
           "
         >
           <Heart
-            size={18}
+            size={16}
             fill={isFavoriteMovie ? "currentColor" : "none"}
             className={`
                 transition-colors duration-300
@@ -139,12 +142,12 @@ function MovieCard({ movie, onViewDetails, genreMap }) {
       </div>
 
       {/* Info */}
-      <div className="space-y-2 p-3 sm:p-4">
-        <div className="flex justify-between text-sm text-zinc-600 dark:text-zinc-300">
+      <div className="space-y-1.5 p-2.5 sm:space-y-2 sm:p-4">
+        <div className="flex justify-between text-xs sm:text-sm text-zinc-600 dark:text-zinc-300">
           <span className="flex items-center gap-1">
             <Star
               size={16}
-              className="fill-yellow-400 text-yellow-400"
+              className="fill-yellow-400 text-yellow-400 sm:h-4 sm:w-4"
             />
             {movie.rating.toFixed(1)}
           </span>
@@ -152,11 +155,11 @@ function MovieCard({ movie, onViewDetails, genreMap }) {
           <span>{movie.year}</span>
         </div>
 
-        <h3 className="line-clamp-1 text-base font-semibold text-zinc-900 sm:text-lg dark:text-white">
+        <h3 className="line-clamp-2 min-h-10 text-sm font-semibold text-zinc-900 sm:line-clamp-1 sm:min-h-0 sm:text-lg dark:text-white">
           {movie.title}
         </h3>
 
-        <p className="text-xs text-zinc-500 sm:text-sm dark:text-zinc-400">
+        <p className="line-clamp-1 text-[11px] text-zinc-500 sm:text-sm dark:text-zinc-400">
           {genres}
         </p>
       </div>
