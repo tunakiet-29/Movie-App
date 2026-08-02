@@ -9,7 +9,7 @@ function SkeletonSection({ title, count = 6}){
                     {title}
                 </h2>
 
-                <div className="h-5 w-20 rounded bg-zinc-800"></div>
+                <div className="h-5 w-20 rounded bg-zinc-200 dark:bg-zinc-800"></div>
             </div>
             
             {/* Skeleton List */}

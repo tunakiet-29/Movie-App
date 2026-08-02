@@ -11,15 +11,15 @@ function ErrorState({ message, onRetry }){
             {/* Message */}
             <h2 className="text-3xl font-bold">Oops!</h2>
 
-            <p className="text-lg text-zinc-300">Something went wrong.</p>
+            <p className="text-lg text-zinc-700 dark:text-zinc-300">Something went wrong.</p>
 
-            <p className="max-w-md text-sm text-zinc-500">{message}</p>
+            <p className="max-w-md text-sm text-zinc-500 dark:text-zinc-500">{message}</p>
 
             {/* Button */}
             <button
                 type="button"
                 onClick={onRetry}
-                className="mt-2 rounded-full bg-red-600 text-white font-medium px-6 py-3 transition-colors duration-300 hover:bg-red-700"
+                className="mt-2 rounded-full bg-red-600 text-white font-medium px-6 py-3 transition-all duration-300 hover:bg-red-700 hover:scale-105"
             >
                 Retry
             </button>
