@@ -31,6 +31,7 @@ export function toggleFavorite(movie){
         title: movie.title,
         poster: movie.poster,
         rating: movie.rating,
+        overview: movie.overview,
         year: movie.year,
         genreIds: movie.genreIds,
     });
