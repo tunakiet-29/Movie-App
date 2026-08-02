@@ -92,15 +92,17 @@ function Navbar() {
               >Favorites</Link>
             </div>
             
-            <div className="flex flex-col items-start px-6 gap-6 mt-6 border-t border-zinc-800 pt-6">
+            <div className="flex flex-col items-start px-6 gap-6 my-6 border-t border-zinc-800 pt-6">
 
               <button
                 type="button"
                 className="flex items-center gap-3 cursor-pointer transition-colors duration-200 hover:text-yellow-500"
                 aria-label="Toggle Theme"
+                onClick={toggleTheme}
               >
-                <Moon size={22} />
-                <span>Dark Mode</span>
+                {
+                  theme === 'dark' ? <Sun size={22} /> : <Moon size={22} />
+                }
               </button>
 
             </div>
